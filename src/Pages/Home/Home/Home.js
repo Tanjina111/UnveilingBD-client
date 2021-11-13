@@ -12,17 +12,17 @@ const Home = () => {
 
     // Load Book
     useEffect(() => {
-        fetch('http://localhost:5000/allBooks')
+        fetch('https://murmuring-brook-36809.herokuapp.com/allBooks')
             .then(res => res.json())
             .then(data => setBook(data));
     }, []);
 
      // Load Review
      useEffect(() => {
-        fetch("http://localhost:5000/review")
+        fetch("https://murmuring-brook-36809.herokuapp.com/review")
             .then((res) => res.json())
             .then((data) => setReview(data));
-    }, [review]);
+    }, []);
 
     return (
         <div>

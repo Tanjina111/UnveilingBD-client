@@ -19,7 +19,7 @@ const AddReview = () => {
         const reviews = { name, email, review, rating};
 
     // Rreview Placed To New Database
-    fetch('http://localhost:5000/review', {
+    fetch('https://murmuring-brook-36809.herokuapp.com/review', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

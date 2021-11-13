@@ -14,7 +14,7 @@ const Detail = () => {
 
   // Get Data
     useEffect(() => {
-    fetch(`http://localhost:5000/allBooks/${id}`)
+    fetch(`https://murmuring-brook-36809.herokuapp.com/allBooks/${id}`)
     .then(res => res.json())
     .then(data => setBook(data))
     }, []);
@@ -42,7 +42,7 @@ const Detail = () => {
         const order = { name, service, price, email, phone, address, img};
 
         // Order Placed To New Database
-        fetch('http://localhost:5000/orders', {
+        fetch('https://murmuring-brook-36809.herokuapp.com/orders', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

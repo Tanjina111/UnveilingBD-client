@@ -8,7 +8,7 @@ const ManageOrders = () => {
 
     // Load Data
     useEffect(() => {
-        fetch("http://localhost:5000/manageorders")
+        fetch("https://murmuring-brook-36809.herokuapp.com/manageorders")
             .then((res) => res.json())
             .then((data) => setOrders(data));
     }, [orders]);
@@ -18,9 +18,9 @@ const ManageOrders = () => {
         const process = window.confirm("Delete order?");
         if (process) {
             fetch(
-                `http://localhost:5000/orders/${id}`, {
-                    method: "DELETE",
-                })
+                `https://murmuring-brook-36809.herokuapp.com/orders/${id}`, {
+                method: "DELETE",
+            })
                 .then((res) => res.json())
                 .then((data) => {
                     if (data.deletedCount > 0) {
@@ -40,7 +40,7 @@ const ManageOrders = () => {
 
     // Update Service
     const handleUpdate = id => {
-        fetch(`http://localhost:5000/orders/${id}`, {
+        fetch(`https://murmuring-brook-36809.herokuapp.com/orders/${id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json',
@@ -52,29 +52,29 @@ const ManageOrders = () => {
                 if (data.modifiedCount > 0) {
                     alert('Successfully Approved')
                 }
-            });       
+            });
     };
 
     return (
         <div>
-        <div className='container my-5 col-sm-12'>
-            <h5>All Orders</h5>
-            <div className='row row-cols-1 row-cols-md-4 g-4 my-3 mx-auto'>
-            {orders.map(order => (
-                <div key={order?._id} className="col text-start shadow rounded m-3 p-3 shadow rounded">
-                <img src={order?.img} className="img-fluid rounded" alt="..." />
-                <div className="card-text text-center mt-2">
-                <h6 className='text-danger'>{order?.service}</h6>
-                <h6>Ordered by: <span className='text-primary'>{order?.name}</span></h6>
-                <button className='btn btn-warning m-1' onClick={() => handleDelete(order?._id)}>Delete</button>
-                <button className='btn btn-warning mb-1' onClick={() => handleUpdate(order?._id)}>{order?.status}</button>
+            <div className='container my-5 col-sm-12'>
+                <h5>All Orders</h5>
+                <div className='row row-cols-1 row-cols-md-4 g-4 my-3 mx-auto'>
+                    {orders.map(order => (
+                        <div key={order?._id} className="col text-start shadow rounded m-3 p-3 shadow rounded">
+                            <img src={order?.img} className="img-fluid rounded" alt="..." />
+                            <div className="card-text text-center mt-2">
+                                <h6 className='text-danger'>{order?.service}</h6>
+                                <h6>Ordered by: <span className='text-primary'>{order?.name}</span></h6>
+                                <button className='btn btn-warning m-1' onClick={() => handleDelete(order?._id)}>Delete</button>
+                                <button className='btn btn-warning mb-1' onClick={() => handleUpdate(order?._id)}>{order?.status}</button>
+                            </div>
+                        </div>
+                    ))}
                 </div>
-                </div>
-            ))}
             </div>
-        </div>
 
-        <img className='img-fluid' src={Image} alt="" />
+            <img className='img-fluid' src={Image} alt="" />
         </div>
     );
 };

@@ -8,7 +8,6 @@ const useFirebase = () => {
     const [user, setUser] = useState({});
     const [authError, setAuthError] = useState('');
     const [isLoading, setIsLoading] = useState(true);
-    const [admin, setAdmin] = useState(false);
 
     const auth = getAuth();
 
@@ -27,41 +26,6 @@ const useFirebase = () => {
             }).catch((error) => {
                 setAuthError(error.message);
             }).finally(() => setIsLoading(false));
-    }
-
-    // State Change
-    useEffect( () => {
-        const unsubscribed = onAuthStateChanged(auth, (user) => {
-            if (user) {
-                setUser(user);
-            } else {
-                setUser({})
-            }
-            setIsLoading(false);
-        });
-        return () => unsubscribed;
-    }, [])
-
-    // Admin Check
-    useEffect( () => {
-        fetch(`http://localhost:5000/users/${user.email}`)
-        .then(res => res.json())
-        .then(data => setAdmin(data.admin))
-    }, [user.email]);
-
-    //Usual Sign In With Pass
-    const signInWithPass = (email, pass, location, history) => {
-        setIsLoading(true);
-        signInWithEmailAndPassword(auth, email, pass)
-            .then((userCredential) => {
-                const destination = location?.state?.from || '/';
-                history.replace(destination);
-                setAuthError('');
-            })
-            .catch((error) => {
-                setAuthError(error.message);
-            })
-            .finally(() => setIsLoading(false));
     }
 
     // // Sign Up With Pass
@@ -87,6 +51,35 @@ const useFirebase = () => {
             .finally(() => setIsLoading(false));
     }
 
+    
+    //Usual Sign In With Pass
+    const signInWithPass = (email, pass, location, history) => {
+        setIsLoading(true);
+        signInWithEmailAndPassword(auth, email, pass)
+            .then((userCredential) => {
+                const destination = location?.state?.from || '/';
+                history.replace(destination);
+                setAuthError('');
+            })
+            .catch((error) => {
+                setAuthError(error.message);
+            })
+            .finally(() => setIsLoading(false));
+    }
+
+    // State Change
+    useEffect( () => {
+        setIsLoading(true);
+        onAuthStateChanged(auth, (user) => {
+    if (user) {
+    
+    setUser(user)
+     } else {
+    setUser({});
+    }
+    setIsLoading(false);
+    });
+    }, [auth])
 
     // Log Out
     const logOut = () => {
@@ -102,7 +95,7 @@ const useFirebase = () => {
     // Save User In Data
     const saveUser = ( email, displayName, method) => {
         const user = {email, displayName};
-        fetch('http://localhost:5000/users', {
+        fetch('https://murmuring-brook-36809.herokuapp.com/user', {
             method : method,
             headers : {
                 'content-type' : 'application/json'
@@ -114,7 +107,6 @@ const useFirebase = () => {
 
     return {
         user,
-        admin,
         authError,
         isLoading,
         signInUsingGoogle,

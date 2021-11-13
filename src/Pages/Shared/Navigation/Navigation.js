@@ -1,12 +1,23 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import useAuth from '../../../Hook/useAuth';
 import './Navigation.css';
 import Image from './pp..jpg'
 
 const Navigation = () => {
-    const {user, logOut, admin} = useAuth();
-    console.log(admin);
+    const {user, logOut} = useAuth();
+    console.log(user);
+    const [admin, setAdmin] = useState(false);
+    
+        useEffect(() => {
+        
+        fetch(`https://murmuring-brook-36809.herokuapp.com/users/${user?.email}`)
+        .then(res => res.json())
+        .then(data => setAdmin(data.admin))
+    }, [])
+    
+
     return (
         <div>
             <nav style={{backgroundColor: "black"}} className="navbar">
@@ -22,24 +33,22 @@ const Navigation = () => {
             <div className='m-auto text-center'>
             {
                 // In Case of Customer
-                !admin && <>
+                user?.email && 
                 <li className="nav-item dropdown m-auto">
-                <button className="nav-link dropdown-toggle btn btn-warning navs text-center text-dark m-auto" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</button>
+                    <button className="nav-link dropdown-toggle btn btn-warning navs text-center text-dark m-auto" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</button>
+                {
+                    !admin ? 
+                    
+                <>
                 <ul className="dropdown-menu" aria-labelledby='navbarDropdown'>
                 <li className='m-auto navs text-center'><NavLink className=' text-decoration-none text-dark' to='/orders/:email'>My Orders</NavLink></li>
                 <li className='m-auto navs text-center'><NavLink className=' text-decoration-none text-dark' to='/addReview'>Add Review</NavLink></li>
                 <li className='m-auto navs text-center'><NavLink className=' text-decoration-none text-dark' to='/payment'>Payment</NavLink></li>
                 <li className='m-auto navs text-center'><button className='btn btn-warning mx-auto' onClick={logOut}>Logout</button></li>
-                </ul>
-                </li>
-                </>
-            }
+                </ul></>
+                :
 
-            {   
-                // In Case of Admin
-                admin && <>
-                <li className="nav-item dropdown m-auto">
-                <button className="nav-link dropdown-toggle btn btn-warning navs text-center text-dark m-auto" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</button>
+                <>
                 <ul className="dropdown-menu" aria-labelledby='navbarDropdown'>
                 <li className='m-auto navs text-center'><NavLink className=' text-decoration-none text-dark' to='/makeAdmin'>Make New Admin</NavLink></li>
                 <li className='m-auto navs text-center'><NavLink className=' text-decoration-none text-dark' to='/manageorders'>Manage Orders</NavLink></li>
@@ -47,8 +56,10 @@ const Navigation = () => {
                 <li className='m-auto navs text-center'><NavLink className=' text-decoration-none text-dark' to='/manageBooks'>Manage Products</NavLink></li>
                 <li className='m-auto navs text-center'><button className='btn btn-warning mx-auto' onClick={logOut}>Logout</button></li>
                 </ul>
-                </li>
                 </>
+                }
+                </li>
+                
             }
             </div>
 

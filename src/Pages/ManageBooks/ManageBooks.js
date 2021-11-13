@@ -5,7 +5,7 @@ const ManageBooks = () => {
 
      // Load Data
      useEffect(() => {
-        fetch("http://localhost:5000/manageBooks")
+        fetch("https://murmuring-brook-36809.herokuapp.com/manageBooks")
             .then((res) => res.json())
             .then((data) => setBooks(data));
     }, [books]);
@@ -15,7 +15,7 @@ const ManageBooks = () => {
         const process = window.confirm("Delete order?");
         if (process) {
             fetch(
-                `http://localhost:5000/allBooks/${id}`, {
+                `https://murmuring-brook-36809.herokuapp.com/allBooks/${id}`, {
                     method: "DELETE",
                 })
                 .then((res) => res.json())

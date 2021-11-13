@@ -7,7 +7,7 @@ const AddService = () => {
 
     // Load Data
     const onSubmit = (data) => {
-        fetch('http://localhost:5000/allBooks', {
+        fetch('https://murmuring-brook-36809.herokuapp.com/allBooks', {
             method: "POST",
             headers: {
                 "content-type": "application/json",
