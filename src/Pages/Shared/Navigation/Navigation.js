@@ -6,7 +6,7 @@ import Image from './pp..jpg'
 
 const Navigation = () => {
     const {user, logOut, admin} = useAuth();
-
+    console.log(admin);
     return (
         <div>
             <nav style={{backgroundColor: "black"}} className="navbar">
@@ -15,16 +15,16 @@ const Navigation = () => {
             
 
             {/* Routes */}
-            <div className='col-lg-6 col-md-5 col-sm-12 d-flex'>
+            <div className='col-lg-5 col-md-5 col-sm-12 d-flex'>
 
             <NavLink className='m-auto text-decoration-none text-white navs' to="/">Home</NavLink>
 
             <div className='m-auto text-center'>
             {
                 // In Case of Customer
-                user.email &&
+                !admin && <>
                 <li className="nav-item dropdown m-auto">
-                <button className="nav-link dropdown-toggle btn btn-warning navs text-center text-dark my-auto" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</button>
+                <button className="nav-link dropdown-toggle btn btn-warning navs text-center text-dark m-auto" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</button>
                 <ul className="dropdown-menu" aria-labelledby='navbarDropdown'>
                 <li className='m-auto navs text-center'><NavLink className=' text-decoration-none text-dark' to='/orders/:email'>My Orders</NavLink></li>
                 <li className='m-auto navs text-center'><NavLink className=' text-decoration-none text-dark' to='/addReview'>Add Review</NavLink></li>
@@ -32,12 +32,14 @@ const Navigation = () => {
                 <li className='m-auto navs text-center'><button className='btn btn-warning mx-auto' onClick={logOut}>Logout</button></li>
                 </ul>
                 </li>
+                </>
             }
-            {
-                // In Case Of Admin
-                admin.email &&
+
+            {   
+                // In Case of Admin
+                admin && <>
                 <li className="nav-item dropdown m-auto">
-                <button className="nav-link dropdown-toggle btn btn-warning navs text-center text-dark my-auto" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</button>
+                <button className="nav-link dropdown-toggle btn btn-warning navs text-center text-dark m-auto" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</button>
                 <ul className="dropdown-menu" aria-labelledby='navbarDropdown'>
                 <li className='m-auto navs text-center'><NavLink className=' text-decoration-none text-dark' to='/makeAdmin'>Make New Admin</NavLink></li>
                 <li className='m-auto navs text-center'><NavLink className=' text-decoration-none text-dark' to='/manageorders'>Manage Orders</NavLink></li>
@@ -46,6 +48,7 @@ const Navigation = () => {
                 <li className='m-auto navs text-center'><button className='btn btn-warning mx-auto' onClick={logOut}>Logout</button></li>
                 </ul>
                 </li>
+                </>
             }
             </div>
 
