@@ -8,6 +8,7 @@ const useFirebase = () => {
     const [user, setUser] = useState({});
     const [authError, setAuthError] = useState('');
     const [isLoading, setIsLoading] = useState(true);
+    const [admin, setAdmin] = useState(false);
 
     const auth = getAuth();
 
@@ -67,6 +68,13 @@ const useFirebase = () => {
             .finally(() => setIsLoading(false));
     }
 
+    // Load Admin Data
+    useEffect(() => {
+        fetch(`https://agile-escarpment-46440.herokuapp.com/users/${user?.email}`)
+        .then(res => res.json())
+        .then(data => setAdmin(data.admin))
+    }, [user.email])
+
     // State Change
     useEffect( () => {
         setIsLoading(true);
@@ -95,7 +103,7 @@ const useFirebase = () => {
     // Save User In Data
     const saveUser = ( email, displayName, method) => {
         const user = {email, displayName};
-        fetch('https://murmuring-brook-36809.herokuapp.com/user', {
+        fetch('https://agile-escarpment-46440.herokuapp.com/user', {
             method : method,
             headers : {
                 'content-type' : 'application/json'
@@ -107,6 +115,7 @@ const useFirebase = () => {
 
     return {
         user,
+        admin,
         authError,
         isLoading,
         signInUsingGoogle,

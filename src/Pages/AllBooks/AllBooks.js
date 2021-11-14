@@ -1,21 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Footer from '../Shared/Footer/Footer';
+import Navigation from '../Shared/Navigation/Navigation';
 
 const AllBooks = (props) => {
     const [book, setBook] = useState([]);
 
     useEffect(() => {
-        fetch('https://murmuring-brook-36809.herokuapp.com/allBooks')
+        fetch('https://agile-escarpment-46440.herokuapp.com/allBooks')
             .then(res => res.json())
-            .then(data => setBook(data));
+            .then(data => {
+                setBook(data)
+            });
     }, []);
 
     return (
         // All Books
+        <div>
+            <Navigation></Navigation>
+
         <div style={{backgroundColor: 'lightsalmon'}} className='container my-5 rounded'>
-        <h3 className='text-dark pt-2'>Our Collection:</h3>
+        <h3 className='text-dark pt-2 border-bottom'>Our Collection:</h3>
         <div className='row row-cols-1 row-cols-md-3 g-4 my-3'>
-    {
+        {
         book.map(books =>
         <div className='col'>
             <div key={books._id} className='card h-100 text-start shadow'>
@@ -39,6 +46,9 @@ const AllBooks = (props) => {
         <div className='mb-4'>
             <Link to='/'><button className='btn btn-primary my-3'>Back To Home</button></Link>
             </div>
+        </div>
+
+        <Footer></Footer>
         </div>       
     );
 };

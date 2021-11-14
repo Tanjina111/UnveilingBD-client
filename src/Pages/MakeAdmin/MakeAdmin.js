@@ -13,7 +13,7 @@ const MakeAdmin = () => {
     // Make Admin
     const adminSubmit = e => {
         const user = {email};
-        fetch('https://murmuring-brook-36809.herokuapp.com/user/admin', {
+        fetch('https://agile-escarpment-46440.herokuapp.com/user/admin', {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

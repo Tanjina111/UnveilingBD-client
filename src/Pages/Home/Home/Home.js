@@ -5,6 +5,8 @@ import Ins from './insta.png'
 import { Link } from 'react-router-dom';
 import Books from '../Books/Books';
 import Review from '../Review/Review';
+import Navigation from '../../../Pages/Shared/Navigation/Navigation'
+import Footer from '../../Shared/Footer/Footer';
 
 const Home = () => {
     const [book, setBook] = useState([]);
@@ -12,20 +14,21 @@ const Home = () => {
 
     // Load Book
     useEffect(() => {
-        fetch('https://murmuring-brook-36809.herokuapp.com/allBooks')
+        fetch('https://agile-escarpment-46440.herokuapp.com/allBooks')
             .then(res => res.json())
             .then(data => setBook(data));
     }, []);
 
      // Load Review
      useEffect(() => {
-        fetch("https://murmuring-brook-36809.herokuapp.com/review")
+        fetch("https://agile-escarpment-46440.herokuapp.com/review")
             .then((res) => res.json())
             .then((data) => setReview(data));
     }, []);
 
     return (
         <div>
+            <Navigation></Navigation>
             {/* First part */}
         <div className="col-sm-12 bg-img">
             <div className='text-end p-5'>
@@ -87,6 +90,7 @@ const Home = () => {
             </div>
         </div>
         </div>
+        <Footer></Footer>
         </div>
     );
 };

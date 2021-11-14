@@ -2,6 +2,8 @@ import { useLocation, useHistory, NavLink } from 'react-router-dom';
 import useAuth from '../../Hook/useAuth';
 import React, { useState } from 'react';
 import Image from './log.jpg'
+import Navigation from '../Shared/Navigation/Navigation';
+import Footer from '../Shared/Footer/Footer';
 
 const LogIn = () => {
     const location = useLocation();
@@ -30,6 +32,7 @@ const LogIn = () => {
     }
 
     return (
+        <><Navigation></Navigation>
         <div className='container d-flex justify-content-evenly my-5 container row mx-auto'>
             <div className='col-12 col-lg-6 col-md-5'>
 
@@ -43,7 +46,7 @@ const LogIn = () => {
                 <h6 className='mt-4'>Password: </h6>
                 <input className='w-50' type="password" name="password" onChange={handleOnChange} required placeholder='Enter Password'/>
                 <br />
-                <input className='btn btn-primary my-4' type="submit" value="Submit"/><br />
+                <input className='btn btn-primary my-4 px-4' type="submit" value="Login"/><br />
                 
                 {/* Spinner */}
                 {isLoading && 
@@ -74,6 +77,8 @@ const LogIn = () => {
                 <img className='img-fluid' src={Image} alt="" />
             </div>
         </div>
+        <Footer></Footer>
+        </>
     );
 };
 

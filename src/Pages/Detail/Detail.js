@@ -4,6 +4,8 @@ import { useHistory, useLocation, useParams } from 'react-router';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import useAuth from '../../Hook/useAuth';
+import Navigation from '../Shared/Navigation/Navigation';
+import Footer from '../Shared/Footer/Footer';
 
 
 const Detail = () => {
@@ -14,7 +16,7 @@ const Detail = () => {
 
   // Get Data
     useEffect(() => {
-    fetch(`https://murmuring-brook-36809.herokuapp.com/allBooks/${id}`)
+    fetch(`https://agile-escarpment-46440.herokuapp.com/allBooks/${id}`)
     .then(res => res.json())
     .then(data => setBook(data))
     }, []);
@@ -42,7 +44,7 @@ const Detail = () => {
         const order = { name, service, price, email, phone, address, img};
 
         // Order Placed To New Database
-        fetch('https://murmuring-brook-36809.herokuapp.com/orders', {
+        fetch('https://agile-escarpment-46440.herokuapp.com/orders', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -62,6 +64,8 @@ const Detail = () => {
 
     return (
         <div>
+            <Navigation></Navigation>
+
         <div className='d-flex justify-content-evenly my-5 container row mx-auto'>
 
             {/* Detail */}
@@ -94,13 +98,12 @@ const Detail = () => {
         </form>
         </div>
         </div>
+
+            {/* Back To Home */}
             <Link  to='/'><button className='btn btn-primary mt-2 mb-5'>Back To Home</button></Link>
 
-            {/* Banner */}
-        {/* <div>
-            <img className="img-fluid w-100" src={Image} alt="" />
-        </div> */}
-            </div>
+        <Footer></Footer>
+        </div>
     );
 };
 

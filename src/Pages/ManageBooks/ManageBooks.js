@@ -5,9 +5,11 @@ const ManageBooks = () => {
 
      // Load Data
      useEffect(() => {
-        fetch("https://murmuring-brook-36809.herokuapp.com/manageBooks")
+        fetch("https://agile-escarpment-46440.herokuapp.com/managebooks")
             .then((res) => res.json())
-            .then((data) => setBooks(data));
+            .then((data) => {
+                setBooks(data)
+            });
     }, [books]);
 
     // Delete Book 
@@ -15,7 +17,7 @@ const ManageBooks = () => {
         const process = window.confirm("Delete order?");
         if (process) {
             fetch(
-                `https://murmuring-brook-36809.herokuapp.com/allBooks/${id}`, {
+                `https://agile-escarpment-46440.herokuapp.com/allBooks/${id}`, {
                     method: "DELETE",
                 })
                 .then((res) => res.json())
@@ -32,7 +34,7 @@ const ManageBooks = () => {
     };
     return (
         <div className='container my-5 col-sm-12'>
-            <h5>All Books</h5>
+            <h5 className='border-bottom'>All Books</h5>
             <div className='row row-cols-1 row-cols-md-4 g-4 my-3 mx-auto'>
             {books.map(book => (
                 <div key={book?._id} className="col text-start shadow rounded m-3 p-3 shadow rounded">

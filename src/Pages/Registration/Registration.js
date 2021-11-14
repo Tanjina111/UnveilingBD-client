@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import useAuth from '../../Hook/useAuth';
+import Footer from '../Shared/Footer/Footer';
+import Navigation from '../Shared/Navigation/Navigation';
 
 
 const Registration = () => {
@@ -27,7 +29,10 @@ const Registration = () => {
     }
 
     return (
-        <div className='container my-5'>
+        <div>
+            <Navigation></Navigation>
+
+            <div className='container my-5'>
             <div>
                 <h2 className='text-primary'>Register</h2>
                 
@@ -48,7 +53,7 @@ const Registration = () => {
                 {/* Re-Enter Pass */}
                 <input onBlur={handleOnBlur} className='mt-3 w-75' type="password" name="password2" placeholder='Re-Enter Password' required/>
                 <br />
-                <input className='mt-2 btn btn-primary' type="submit" value="Submit" /><br />
+                <input className='mt-2 btn btn-primary px-4' type="submit" value="Submit" /><br />
 
                 {/* Spinner */}
                 {isLoading && 
@@ -72,6 +77,9 @@ const Registration = () => {
                 {/* Take To Log In */}
                 <p className='mt-4'>Already have an account? <Link to='/login'><button className='btn btn-warning'>Login</button></Link></p>
             </div>
+        </div>
+
+            <Footer></Footer>
         </div>
     );
 };

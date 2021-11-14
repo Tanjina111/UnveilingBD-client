@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
+import useAuth from "../../Hook/useAuth";
 import Image from './ord.png'
 
 const ManageOrders = () => {
@@ -8,9 +9,11 @@ const ManageOrders = () => {
 
     // Load Data
     useEffect(() => {
-        fetch("https://murmuring-brook-36809.herokuapp.com/manageorders")
+        fetch("https://agile-escarpment-46440.herokuapp.com/manageorders")
             .then((res) => res.json())
-            .then((data) => setOrders(data));
+            .then((data) => {
+                setOrders(data);
+            });
     }, [orders]);
 
     // Delete Service 
@@ -18,7 +21,7 @@ const ManageOrders = () => {
         const process = window.confirm("Delete order?");
         if (process) {
             fetch(
-                `https://murmuring-brook-36809.herokuapp.com/orders/${id}`, {
+                `https://agile-escarpment-46440.herokuapp.com/orders/${id}`, {
                 method: "DELETE",
             })
                 .then((res) => res.json())
@@ -40,7 +43,7 @@ const ManageOrders = () => {
 
     // Update Service
     const handleUpdate = id => {
-        fetch(`https://murmuring-brook-36809.herokuapp.com/orders/${id}`, {
+        fetch(`https://agile-escarpment-46440.herokuapp.com/orders/${id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json',

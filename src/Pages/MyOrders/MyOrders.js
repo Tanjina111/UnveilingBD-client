@@ -11,16 +11,18 @@ const MyOrders = () => {
 
     // Load Data
     useEffect(() => {
-        fetch(`https://murmuring-brook-36809.herokuapp.com/orders?email=${user.email}`)
+        fetch(`https://agile-escarpment-46440.herokuapp.com/orders?email=${user.email}`)
         .then(res => res.json())
-        .then(data => setOrders(data));
+        .then(data => {
+            setOrders(data)
+        });
     }, []);
 
     // Delete Service
     const handleDelete = id => {
         const confirm = window.confirm('Delete this order?');
         if(confirm) {
-            fetch(`https://murmuring-brook-36809.herokuapp.com/orders/${id}`, {
+            fetch(`https://agile-escarpment-46440.herokuapp.com/orders/${id}`, {
                 method: 'DELETE',
             })
             .then(res => res.json())
@@ -38,7 +40,7 @@ const MyOrders = () => {
        
         <div>
             <div className='container my-5 col-sm-12'>
-            <h5 className='mb-4'>My Orders</h5>
+            <h5 className='mb-4 border-bottom'>My Orders</h5>
             <div className='row row-cols-1 row-cols-md-4 g-4'>
             {orders.map(order => <Order
             key = {order._id}

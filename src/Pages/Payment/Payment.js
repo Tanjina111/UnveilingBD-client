@@ -7,7 +7,7 @@ const Payment = () => {
     return (
         <div className='container my-4'>
             <div className='col-lg-6 mx-auto'>
-            <h4>Choose Your Payment Method</h4>
+            <h4 className='border-bottom'>Payment Method Coming Soon</h4>
             <img width='300px' className='img-fluid' src={img1} alt="" /><br /><br />
             <img width='300px' className='img-fluid' src={img2} alt="" /><br /><br />
             <img width='300px' className='img-fluid' src={img3} alt="" />
